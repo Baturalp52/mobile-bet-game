@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.termproject.classes.Fixture
 import com.termproject.classes.FixtureResponse
+import com.termproject.classes.OddResponse
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okio.IOException
@@ -29,10 +30,10 @@ class MainActivity : AppCompatActivity() {
 
         lateinit var fixtureList: MutableList<Fixture>
         var getService = ApiClient.getClient().create(GetService::class.java)
-        var request = getService.getFixtures(getApiKey(), "2023", "203") //203 = Süper Lig
+        var fixturesRequest = getService.getFixtures(getApiKey(), "2023", "203") //203 = Süper Lig
 
         Log.d("JSONARRAYPARSE", "Before Request")
-        request.enqueue(object : Callback<FixtureResponse> {
+        fixturesRequest.enqueue(object : Callback<FixtureResponse> {
             override fun onFailure(call: Call<FixtureResponse>, t: Throwable) {
                 Toast.makeText(applicationContext, t.message.toString(), Toast.LENGTH_LONG).show()
                 Log.d("JSONARRAYPARSE", "Error: "+t.message.toString())
@@ -45,37 +46,22 @@ class MainActivity : AppCompatActivity() {
             }
         })
         Log.d("JSONARRAYPARSE", "After Request")
-        /*If we can use retrofit-gson, delete here
-        val client = OkHttpClient()
 
-        fun run() {
-            val request = Request.Builder()
-                .url("https://v3.football.api-sports.io/fixtures?season=2023&league=203")
-                .addHeader("x-apisports-key", getApiKey())
-                .build()
-
-            client.newCall(request).execute().use { response ->
-                if (!response.isSuccessful) throw IOException("Unexpected code $response")
-
-                for ((name, value) in response.headers) {
-                    println("$name: $value")
+        var oddsRequest = getService.getOdds(getApiKey(), "2023", "203") //203 = Süper Lig
+        Log.d("JSONARRAYPARSE", "Before Request")
+        oddsRequest.enqueue(object : Callback<OddResponse> {
+            override fun onFailure(call: Call<OddResponse>, t: Throwable) {
+                Toast.makeText(applicationContext, t.message.toString(), Toast.LENGTH_LONG).show()
+                Log.d("JSONARRAYPARSE", "Error: "+t.message.toString())
+            }
+            override fun onResponse(call: Call<OddResponse>, response: Response<OddResponse>) {
+                Log.d("JSONARRAYPARSE", "Response taken")
+                if (response.isSuccessful) {
+                    Log.d("JSONARRAYPARSE", response.body()?.response?.get(0)?.league.toString())
                 }
-
-                Log.d("RESPONSE", response.body!!.string())
             }
-        }
-
-        val executor = Executors.newSingleThreadExecutor()
-        val handler = Handler(Looper.getMainLooper())
-        executor.execute {
-            //val response = sendGetRequest("fixtures", "203", "2023")
-            run()
-
-            handler.post {
-                //for UI interaction
-            }
-        }
-         */
+        })
+        Log.d("JSONARRAYPARSE", "After Request")
     }
 
     private fun getApiKey() : String {  //will return one of the available api keys

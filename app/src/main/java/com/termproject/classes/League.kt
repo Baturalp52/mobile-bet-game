@@ -1,5 +1,6 @@
 package com.termproject.classes
 
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 class League(
@@ -14,5 +15,4 @@ class League(
     override fun toString(): String {
         return "League(id=$id, name='$name', country='$country', logo='$logo', flag='$flag', season=$season, round='$round')"
     }
-
 }
