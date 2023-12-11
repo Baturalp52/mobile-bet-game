@@ -2,33 +2,21 @@ package com.termproject
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.termproject.classes.Fixture
 import com.termproject.classes.FixtureResponse
 import com.termproject.classes.OddResponse
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okio.IOException
+import com.termproject.classes.Odds
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.BufferedReader
-import java.io.InputStreamReader
-import java.net.HttpURLConnection
-import java.net.URLEncoder
-import java.net.URL
-import java.util.concurrent.Executors
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        lateinit var fixtureList: MutableList<Fixture>
         var getService = ApiClient.getClient().create(GetService::class.java)
         var fixturesRequest = getService.getFixtures(getApiKey(), "2023", "203") //203 = Süper Lig
 
@@ -61,7 +49,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
-        Log.d("JSONARRAYPARSE", "After Request")
     }
 
     private fun getApiKey() : String {  //will return one of the available api keys
