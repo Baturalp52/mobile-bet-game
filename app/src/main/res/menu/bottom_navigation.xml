@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bulletin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:enabled="true"
+        android:icon="@drawable/bulletin_icon"
+        android:title="@string/bulletin" />
+    <item
+        android:id="@+id/coupon"
+        android:enabled="true"
+        android:icon="@drawable/coupon_icon"
+        android:title="@string/your_coupon" />
+    <item
+        android:id="@+id/coupons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:enabled="true"
+        android:icon="@drawable/coupons_icon"
+        android:title="@string/past_coupons" />
+</menu>

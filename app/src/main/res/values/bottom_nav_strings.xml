@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bulletin">Bulletin</string>
+    <string name="your_coupon">Your Coupon</string>
+    <string name="past_coupons">My Coupons</string>
+</resources>
