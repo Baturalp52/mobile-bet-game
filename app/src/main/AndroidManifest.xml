@@ -17,9 +17,7 @@
         <activity
             android:name=".ProfileActivity"
             android:exported="false" />
-        <activity
-            android:name=".NavigationActivity"
-            android:exported="false" />
+     
         <activity
             android:name=".MainActivity"
             android:exported="true">
