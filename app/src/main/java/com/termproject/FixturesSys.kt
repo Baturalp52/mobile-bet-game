@@ -35,10 +35,10 @@ object FixturesSys {
                 call: Call<FixtureResponse>,
                 response: Response<FixtureResponse>
             ) {
-                Log.d("FETCH", "FETCHING")
+    
                 if (response.isSuccessful) {
                     fixtures = ArrayList(response.body()?.response)
-                    Log.d("FETCH", fixtures.toString())
+
                     adapter.notifyDataSetChanged()
 
                 }

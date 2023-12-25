@@ -54,7 +54,7 @@ class FixturesRecyclerViewAdapter(
     }
 
     override fun getItemCount(): Int {
-        Log.d("SIZE", FixturesSys.fixtures.size.toString())
+
         return FixturesSys.fixtures.size
     }
 
