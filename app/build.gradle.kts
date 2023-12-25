@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -47,6 +48,7 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
+    implementation("androidx.room:room-common:2.6.1")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -68,4 +70,22 @@ dependencies {
     implementation("androidx.fragment:fragment-ktx:$fragmentVersion")
 
     implementation("com.squareup.picasso:picasso:2.8")
+
+    val roomVersion = "2.6.0"
+
+    // Room components
+    implementation("androidx.room:room-runtime:$roomVersion")
+    kapt("androidx.room:room-compiler:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
+    androidTestImplementation("androidx.room:room-testing:$roomVersion")
+
+    // Lifecycle components
+    implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
+    implementation("androidx.lifecycle:lifecycle-common-java8:2.2.0")
+
+
+    // Kotlin components
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72")
+    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.5")
+    api("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.5")
 }
