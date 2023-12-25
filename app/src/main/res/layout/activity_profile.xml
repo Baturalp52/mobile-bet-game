@@ -5,6 +5,7 @@
     android:id="@+id/et"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg"
     android:orientation="vertical"
     tools:context=".ProfileActivity">
 
@@ -22,53 +23,84 @@
         android:id="@+id/etName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="5dp"
         android:layout_weight="1"
+        android:background="#B3FAFAD2"
         android:ems="10"
         android:hint="Name"
-        android:inputType="text" />
+        android:inputType="text"
+        android:padding="10dp"
+        android:textColorHint="@color/black"
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/etSurname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="5dp"
         android:layout_weight="1"
+        android:background="#B3FAFAD2"
         android:ems="10"
         android:hint="Surname"
-        android:inputType="text" />
+        android:inputType="text"
+        android:padding="10dp"
+        android:textColorHint="@color/black"
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/etCity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="5dp"
         android:layout_weight="1"
+        android:background="#B3FAFAD2"
         android:ems="10"
         android:hint="City"
-        android:inputType="text" />
+        android:inputType="text"
+        android:padding="10dp"
+        android:textColorHint="@color/black"
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/etDistrict"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="5dp"
         android:layout_weight="1"
+        android:background="#B3FAFAD2"
         android:ems="10"
         android:hint="District"
-        android:inputType="text" />
+        android:inputType="text"
+        android:padding="10dp"
+        android:textColorHint="@color/black"
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/etTeam"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="5dp"
         android:layout_weight="1"
+        android:background="#B3FAFAD2"
         android:ems="10"
         android:hint="Team"
-        android:inputType="text" />
+        android:inputType="text"
+        android:padding="10dp"
+        android:textColorHint="@color/black"
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/profileBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="2dp"
+        android:layout_marginVertical="5dp"
         android:layout_weight="1"
+        android:background="#B31C1C04"
         android:text="Save" />
 
 </LinearLayout>
