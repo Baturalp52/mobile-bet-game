@@ -2,38 +2,27 @@ package com.termproject
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract.Profile
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
-import com.termproject.classes.Fixture
-import com.termproject.classes.FixtureResponse
-import com.termproject.classes.OddResponse
-import com.termproject.classes.Odds
 import com.termproject.databinding.ActivityMainBinding
-import com.termproject.db.user.User
 import com.termproject.db.user.UserViewModel
 import com.termproject.fragments.BulletinFragment
 import com.termproject.fragments.CouponFragment
 import com.termproject.fragments.CouponsFragment
+import com.termproject.ui.CreditDialog
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class MainActivity : FragmentActivity() {
 
     lateinit var binding: ActivityMainBinding
     private lateinit var userViewModel: UserViewModel
+    private lateinit var creditDialog: CreditDialog
 
     override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
         CoroutineScope(Dispatchers.Main).launch {
@@ -91,6 +80,12 @@ class MainActivity : FragmentActivity() {
         binding.profileButton.setOnClickListener {
             val newActivityIntent = Intent(this, ProfileActivity::class.java)
             startActivity(newActivityIntent)
+        }
+
+        creditDialog = CreditDialog(this, userViewModel, binding.creditsButton)
+
+        binding.creditsButton.setOnClickListener {
+            creditDialog.show()
         }
     }
 
