@@ -7,9 +7,10 @@ import androidx.room.RoomDatabase
 import com.termproject.Constants
 import com.termproject.classes.ApiKey
 import com.termproject.classes.Coupon
+import com.termproject.classes.CouponData
 
 @Database(
-    entities = [Coupon::class],
+    entities = [CouponData::class],
     version = 2,
     exportSchema = false
 )

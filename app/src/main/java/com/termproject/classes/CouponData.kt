@@ -4,9 +4,10 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.termproject.Constants
 
-class Coupon(
-    var status: String,
-    val bets: List<Bet>
+@Entity(tableName = Constants.COUPONTABLENAME)
+class CouponData (
+    @PrimaryKey
+    var data: String,
 ) {
 
 }

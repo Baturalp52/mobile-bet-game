@@ -8,12 +8,16 @@ import androidx.room.Query
 import com.termproject.Constants
 import com.termproject.classes.ApiKey
 import com.termproject.classes.Coupon
+import com.termproject.classes.CouponData
 
 @Dao
 interface CouponDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertCoupon(coupon: Coupon)
+    fun insertCoupons(coupons: CouponData)
 
-    @Query("SELECT * FROM ${Constants.COUPONTABLENAME} ORDER BY id ASC")
-    fun getAllCoupons():LiveData<List<Coupon>>
+    @Query("DELETE FROM ${Constants.COUPONTABLENAME}")
+    fun deleteCoupons()
+
+    @Query("SELECT * FROM ${Constants.COUPONTABLENAME}")
+    fun getAllCoupons():LiveData<List<CouponData>>
 }

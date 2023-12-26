@@ -46,12 +46,7 @@ class MainActivity : FragmentActivity() {
 
         userViewModel = ViewModelProvider(this)?.get(UserViewModel::class.java)!!
 
-
-
-
-
         loadFragment(BulletinFragment())
-
 
         binding.bottomNav.setOnItemSelectedListener { it ->
             when (it.itemId) {
@@ -88,7 +83,6 @@ class MainActivity : FragmentActivity() {
             creditDialog.show()
         }
     }
-
 
     private fun loadFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
