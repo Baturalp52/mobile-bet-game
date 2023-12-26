@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import com.termproject.databinding.ActivityMainBinding
+import com.termproject.db.coupon.CouponViewModel
+import com.termproject.db.user.User
 import com.termproject.db.user.UserViewModel
 import com.termproject.fragments.BulletinFragment
 import com.termproject.fragments.CouponFragment
@@ -22,17 +24,30 @@ class MainActivity : FragmentActivity() {
 
     lateinit var binding: ActivityMainBinding
     private lateinit var userViewModel: UserViewModel
+    private lateinit var couponViewModel: CouponViewModel
     private lateinit var creditDialog: CreditDialog
+    lateinit var existingUser: User
 
     override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
         CoroutineScope(Dispatchers.Main).launch {
-            val existingUser = userViewModel.getUser()
+            existingUser = userViewModel.getUser()
 
-            if (existingUser != null) {
-                binding.profileButton.text = "${existingUser.name} ${existingUser.surname}"
-
-                binding.creditsButton.text = existingUser.credit.toString()
+            if (existingUser == null) {
+                existingUser = User(
+                    name = "New",
+                    surname = "User",
+                    city = "",
+                    district = "",
+                    team = ""
+                )
+                existingUser.credit = 1000
+                userViewModel.createNewUser(existingUser)
+            } else {
             }
+            binding.profileButton.text = "${existingUser.name} ${existingUser.surname}"
+
+            binding.creditsButton.text = existingUser.credit.toString()
+
 
         }
 
@@ -45,6 +60,7 @@ class MainActivity : FragmentActivity() {
         setContentView(binding.root)
 
         userViewModel = ViewModelProvider(this)?.get(UserViewModel::class.java)!!
+        couponViewModel = ViewModelProvider(this)?.get(CouponViewModel::class.java)!!
 
 
 
