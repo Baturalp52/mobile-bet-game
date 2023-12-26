@@ -22,7 +22,6 @@ class ProfileActivity : AppCompatActivity() {
 
     private lateinit var userViewModel: UserViewModel
 
-
     override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
         CoroutineScope(Dispatchers.Main).launch {
             val existingUser = userViewModel.getUser()
