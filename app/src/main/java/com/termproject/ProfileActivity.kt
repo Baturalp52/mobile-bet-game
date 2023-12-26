@@ -29,11 +29,11 @@ class ProfileActivity : AppCompatActivity() {
             val existingUser = userViewModel.getUser()
 
             if (existingUser != null) {
-                binding.etName.setText(existingUser.name)
-                binding.etSurname.setText(existingUser.surname)
-                binding.etCity.setText(existingUser.city)
-                binding.etTeam.setText(existingUser.team)
-                binding.etDistrict.setText(existingUser.district)
+                binding.etName.editText?.setText(existingUser.name)
+                binding.etSurname.editText?.setText(existingUser.surname)
+                binding.etCity.editText?.setText(existingUser.city)
+                binding.etTeam.editText?.setText(existingUser.team)
+                binding.etDistrict.editText?.setText(existingUser.district)
             }
 
         }
@@ -50,11 +50,11 @@ class ProfileActivity : AppCompatActivity() {
         userViewModel = ViewModelProvider(this)?.get(UserViewModel::class.java)!!
 
         binding.profileBtn.setOnClickListener {
-            val name: String = binding.etName.text.toString()
-            val surname: String = binding.etSurname.text.toString()
-            val city: String = binding.etCity.text.toString()
-            val district: String = binding.etDistrict.text.toString()
-            val team: String = binding.etTeam.text.toString()
+            val name: String = binding.etName.editText?.text.toString()
+            val surname: String = binding.etSurname.editText?.text.toString()
+            val city: String = binding.etCity.editText?.text.toString()
+            val district: String = binding.etDistrict.editText?.text.toString()
+            val team: String = binding.etTeam.editText?.text.toString()
             CoroutineScope(Dispatchers.Main).launch {
                 val existingUser = userViewModel.getUser()
 

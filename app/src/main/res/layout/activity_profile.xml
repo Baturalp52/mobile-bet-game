@@ -5,91 +5,84 @@
     android:id="@+id/et"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
+    android:gravity="center|top"
     android:orientation="vertical"
+    android:padding="15dp"
     tools:context=".ProfileActivity">
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etName"
+        style="?attr/textInputOutlinedDenseStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginVertical="5dp"
-        android:layout_weight="1"
-        android:background="#B3FAFAD2"
-        android:ems="10"
         android:hint="Name"
-        android:inputType="text"
-        android:padding="10dp"
-        android:textColorHint="@color/black"
-        android:textSize="20sp" />
+        android:inputType="text">
 
-    <EditText
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etSurname"
+        style="?attr/textInputOutlinedDenseStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginVertical="5dp"
-        android:layout_weight="1"
-        android:background="#B3FAFAD2"
-        android:ems="10"
         android:hint="Surname"
-        android:inputType="text"
-        android:padding="10dp"
-        android:textColorHint="@color/black"
-        android:textSize="20sp" />
+        android:inputType="text">
 
-    <EditText
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etCity"
+        style="?attr/textInputOutlinedDenseStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginVertical="5dp"
-        android:layout_weight="1"
-        android:background="#B3FAFAD2"
-        android:ems="10"
         android:hint="City"
-        android:inputType="text"
-        android:padding="10dp"
-        android:textColorHint="@color/black"
-        android:textSize="20sp" />
+        android:inputType="text">
 
-    <EditText
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etDistrict"
+        style="?attr/textInputOutlinedDenseStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginVertical="5dp"
-        android:layout_weight="1"
-        android:background="#B3FAFAD2"
-        android:ems="10"
         android:hint="District"
-        android:inputType="text"
-        android:padding="10dp"
-        android:textColorHint="@color/black"
-        android:textSize="20sp" />
+        android:inputType="text">
 
-    <EditText
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etTeam"
+        style="?attr/textInputOutlinedDenseStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginVertical="5dp"
-        android:layout_weight="1"
-        android:background="#B3FAFAD2"
-        android:ems="10"
         android:hint="Team"
-        android:inputType="text"
-        android:padding="10dp"
-        android:textColorHint="@color/black"
-        android:textSize="20sp" />
+        android:inputType="text">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <Button
         android:id="@+id/profileBtn"
-        android:layout_width="match_parent"
+        style="?attr/materialButtonStyle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="5dp"
-        android:layout_weight="1"
-        android:background="#B31C1C04"
         android:text="Save" />
+
 </LinearLayout>
