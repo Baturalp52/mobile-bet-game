@@ -9,8 +9,17 @@ import retrofit2.http.Query
 
 interface GetService {
     @GET("fixtures")
-    fun getFixtures(@Header("x-apisports-key") apiKey: String, @Query("season") season: String, @Query("league") league: String): Call<FixtureResponse>
+    fun getFixtures(
+        @Header("x-apisports-key") apiKey: String,
+        @Query("season") season: String,
+        @Query("date") date: String,
+        //@Query("status") status: String = "NS"
+    ): Call<FixtureResponse>
 
     @GET("odds")
-    fun getOdds(@Header("x-apisports-key") apiKey: String, @Query("season") season: String, @Query("league") league: String): Call<OddResponse>
+    fun getOdds(
+        @Header("x-apisports-key") apiKey: String,
+        @Query("season") season: String,
+        @Query("league") league: String
+    ): Call<OddResponse>
 }
