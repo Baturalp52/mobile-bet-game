@@ -2,13 +2,9 @@ package com.termproject.ui
 
 
 import android.content.Context
-import android.util.AttributeSet
-import android.view.View
 import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.termproject.R
 import com.termproject.db.user.User
 import com.termproject.db.user.UserViewModel
 import kotlinx.coroutines.CoroutineScope
