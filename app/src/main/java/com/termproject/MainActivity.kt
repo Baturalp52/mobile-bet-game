@@ -1,57 +1,98 @@
 package com.termproject
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
-import com.termproject.classes.Fixture
-import com.termproject.classes.FixtureResponse
-import com.termproject.classes.OddResponse
-import com.termproject.classes.Odds
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import android.util.AttributeSet
+import android.view.View
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.ViewModelProvider
+import com.termproject.databinding.ActivityMainBinding
+import com.termproject.db.user.UserViewModel
+import com.termproject.fragments.BulletinFragment
+import com.termproject.fragments.CouponFragment
+import com.termproject.fragments.CouponsFragment
+import com.termproject.ui.CreditDialog
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+class MainActivity : FragmentActivity() {
 
-        var getService = ApiClient.getClient().create(GetService::class.java)
-        var fixturesRequest = getService.getFixtures(getApiKey(), "2023", "203") //203 = Süper Lig
+    lateinit var binding: ActivityMainBinding
+    private lateinit var userViewModel: UserViewModel
+    private lateinit var creditDialog: CreditDialog
 
-        Log.d("JSONARRAYPARSE", "Before Request")
-        fixturesRequest.enqueue(object : Callback<FixtureResponse> {
-            override fun onFailure(call: Call<FixtureResponse>, t: Throwable) {
-                Toast.makeText(applicationContext, t.message.toString(), Toast.LENGTH_LONG).show()
-                Log.d("JSONARRAYPARSE", "Error: "+t.message.toString())
-            }
-            override fun onResponse(call: Call<FixtureResponse>, response: Response<FixtureResponse>) {
-                Log.d("JSONARRAYPARSE", "Response taken")
-                if (response.isSuccessful) {
-                    Log.d("JSONARRAYPARSE", response.body()?.response?.get(0)?.fixture.toString())
-                }
-            }
-        })
-        Log.d("JSONARRAYPARSE", "After Request")
+    override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
+        CoroutineScope(Dispatchers.Main).launch {
+            val existingUser = userViewModel.getUser()
 
-        var oddsRequest = getService.getOdds(getApiKey(), "2023", "203") //203 = Süper Lig
-        Log.d("JSONARRAYPARSE", "Before Request")
-        oddsRequest.enqueue(object : Callback<OddResponse> {
-            override fun onFailure(call: Call<OddResponse>, t: Throwable) {
-                Toast.makeText(applicationContext, t.message.toString(), Toast.LENGTH_LONG).show()
-                Log.d("JSONARRAYPARSE", "Error: "+t.message.toString())
+            if (existingUser != null) {
+                binding.profileButton.text = "${existingUser.name} ${existingUser.surname}"
+
+                binding.creditsButton.text = existingUser.credit.toString()
             }
-            override fun onResponse(call: Call<OddResponse>, response: Response<OddResponse>) {
-                Log.d("JSONARRAYPARSE", "Response taken")
-                if (response.isSuccessful) {
-                    Log.d("JSONARRAYPARSE", response.body()?.response?.get(0)?.league.toString())
-                }
-            }
-        })
+
+        }
+
+        return super.onCreateView(name, context, attrs)
     }
 
-    private fun getApiKey() : String {  //will return one of the available api keys
-        return "6835dc23ed526feb2f7f4332b6ebfc39"
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        userViewModel = ViewModelProvider(this)?.get(UserViewModel::class.java)!!
+
+
+
+
+
+        loadFragment(BulletinFragment())
+
+
+        binding.bottomNav.setOnItemSelectedListener { it ->
+            when (it.itemId) {
+                R.id.bulletin -> {
+                    loadFragment(BulletinFragment())
+                    true
+                }
+
+                R.id.coupon -> {
+                    loadFragment(CouponFragment())
+                    true
+                }
+
+                R.id.coupons -> {
+                    loadFragment(CouponsFragment())
+                    true
+                }
+
+                else -> {
+                    loadFragment(BulletinFragment())
+                    true
+                }
+            }
+        }
+
+        binding.profileButton.setOnClickListener {
+            val newActivityIntent = Intent(this, ProfileActivity::class.java)
+            startActivity(newActivityIntent)
+        }
+
+        creditDialog = CreditDialog(this, userViewModel, binding.creditsButton)
+
+        binding.creditsButton.setOnClickListener {
+            creditDialog.show()
+        }
+    }
+
+
+    private fun loadFragment(fragment: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment_container, fragment)
+        transaction.commit()
     }
 }
