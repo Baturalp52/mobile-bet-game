@@ -7,6 +7,8 @@ object Constants {
     const val APIKEYDATABASENAME="apikeysDB"
     const val COUPONTABLENAME="coupons"
     const val COUPONDATABASENAME="couponsDB"
+    const val SYSTEMTABLENAME="system"
+    const val SYSTEMDATABASENAME="systemDB"
     var baseUrl: String = "https://v3.football.api-sports.io/"
     var baseUrlForImage: String = "https://media-4.api-sports.io/"
     var leagues: ArrayList<Int> = arrayListOf(39, 78, 203)

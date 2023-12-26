@@ -30,6 +30,10 @@ class FixtureDataViewModel(application:Application):AndroidViewModel(application
         }
     }
     fun getFixtureData():String{
-        return repository.getFixtureData().data
+        lateinit var data:String
+        viewModelScope.launch(Dispatchers.IO){ // that code will be run in background thread, coroutine scope
+            data = repository.getFixtureData().data
+        }
+        return data
     }
 }

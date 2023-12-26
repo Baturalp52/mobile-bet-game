@@ -19,11 +19,11 @@ import java.util.Collections
 
 
 object FixturesSys {
-    private lateinit var fixtureView: FixtureDataViewModel
-    private lateinit var apiKeyView: ApiKeyViewModel
-    private lateinit var couponView: CouponViewModel
-    lateinit var fixtures: List<Fixture>
-    private lateinit var odds: List<Odds>
+    //private lateinit var fixtureView: FixtureDataViewModel
+    //private lateinit var apiKeyView: ApiKeyViewModel
+    //private lateinit var couponView: CouponViewModel
+    var fixtures: List<Fixture> = ArrayList<Fixture>()
+    //private lateinit var odds: List<Odds>
 
     fun prepareData(adapter: FixturesRecyclerViewAdapter) {
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
@@ -44,7 +44,7 @@ object FixturesSys {
             ) {
                 if (response.isSuccessful) {
                     fixtures = response.body()?.response!!
-
+                    Log.d("RESPONSE", response.body()?.response.toString())
                     adapter.notifyDataSetChanged()
                 }
             }
