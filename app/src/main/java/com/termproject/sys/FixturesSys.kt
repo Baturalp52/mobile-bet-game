@@ -52,7 +52,7 @@ class FixturesSys {
         }
 
         private fun getApiKey(): String {  //will return one of the available api keys
-            return "2513a1a8f6651498fa33fa0a17d7c215"
+            return "a8bd830f8740a460aae6d34b1ce68a50"
         }
     }
 

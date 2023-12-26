@@ -1,12 +1,14 @@
 package com.termproject
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.termproject.sys.FixturesSys
@@ -48,9 +50,10 @@ class FixturesRecyclerViewAdapter(
 
 
         myRecyclerViewItemHolder.parentLayout.setOnClickListener {
-
+                val newActivityIntent = Intent(context, MatchDetailActivity::class.java)
+                newActivityIntent.putExtra("fixtureId", fixture.fixture.id)
+                context.startActivity(newActivityIntent)
         }
-
     }
 
     override fun getItemCount(): Int {
