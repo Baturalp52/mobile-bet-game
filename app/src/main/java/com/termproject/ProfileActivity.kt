@@ -57,24 +57,12 @@ class ProfileActivity : AppCompatActivity() {
             CoroutineScope(Dispatchers.Main).launch {
                 val existingUser = userViewModel.getUser()
 
-                if (existingUser == null) {
-                    val user = User(
-                        name = name,
-                        surname = surname,
-                        city = city,
-                        district = district,
-                        team = team
-                    )
-                    user.credit = 1000
-                    userViewModel.createNewUser(user)
-                } else {
-                    existingUser.team = team
-                    existingUser.name = name
-                    existingUser.surname = surname
-                    existingUser.district = district
-                    existingUser.city = city
-                    userViewModel.updateUser(existingUser)
-                }
+                existingUser.team = team
+                existingUser.name = name
+                existingUser.surname = surname
+                existingUser.district = district
+                existingUser.city = city
+                userViewModel.updateUser(existingUser)
 
             }
 
