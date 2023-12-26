@@ -4,4 +4,21 @@
     <string name="credit_text">Credit:</string>
     <string name="profile_page_title">Your Profile</string>
     <string name="close_text">Close</string>
+
+    <!-- Coupon Amount -->
+    <string name="coupon_amount_label">Coupon Amount: </string>
+
+    <!-- Total Amount -->
+    <string name="total_amount_label">Total Amount: </string>
+
+    <!-- Maximum Rate -->
+    <string name="max_rate_label">Maximum Rate: </string>
+    <string name="enter_balance_hint">Enter Balance</string>
+
+    <!-- Maximum Profit -->
+    <string name="max_profit_label">Maximum Profit: </string>
+
+    <!-- Button Play -->
+    <string name="btn_play_label">Play</string>
+
 </resources>

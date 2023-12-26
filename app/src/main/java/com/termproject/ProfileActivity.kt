@@ -7,6 +7,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.termproject.databinding.ActivityProfileBinding
@@ -64,12 +65,15 @@ class ProfileActivity : AppCompatActivity() {
                 existingUser.city = city
                 userViewModel.updateUser(existingUser)
 
+                Toast.makeText(this@ProfileActivity, "Profile updated", Toast.LENGTH_SHORT).show()
+                // Finish the current activity and go back to the MainActivity
+                finish()
             }
 
 
         }
 
-        setSupportActionBar(binding.toolbar)
+        supportActionBar?.setTitle("Your Profile")
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
