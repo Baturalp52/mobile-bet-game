@@ -12,7 +12,7 @@ import java.util.*
 @Entity(tableName = "coupons")
 class Coupon(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
-    val status: CouponStatus,
+    var status: CouponStatus,
     var playedAt: LocalDateTime = LocalDateTime.now(),
     var amount: Int = 0
 ) {

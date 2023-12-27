@@ -10,6 +10,8 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
 import com.termproject.databinding.ActivityMainBinding
 import com.termproject.db.coupon.CouponViewModel
 import com.termproject.db.user.User
@@ -21,12 +23,13 @@ import com.termproject.ui.CreditDialog
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.concurrent.TimeUnit
 
 class MainActivity : FragmentActivity() {
 
     lateinit var binding: ActivityMainBinding
     private lateinit var userViewModel: UserViewModel
-    private lateinit var couponViewModel: CouponViewModel
+    lateinit var couponViewModel: CouponViewModel
     private lateinit var creditDialog: CreditDialog
     lateinit var existingUser: User
     lateinit var mediaPlayer: MediaPlayer
@@ -36,10 +39,10 @@ class MainActivity : FragmentActivity() {
 
     override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
         CoroutineScope(Dispatchers.Main).launch {
-            existingUser = userViewModel.getUser()
+            val user = userViewModel.getUser()
 
 
-            if (existingUser == null) {
+            if (user == null) {
                 existingUser = User(
                     name = "New",
                     surname = "User",
@@ -49,6 +52,8 @@ class MainActivity : FragmentActivity() {
                 )
                 existingUser.credit = 1000
                 userViewModel.createNewUser(existingUser)
+            } else {
+                existingUser = user
             }
             binding.profileButton.text = "${existingUser.name} ${existingUser.surname}"
 
@@ -81,6 +86,9 @@ class MainActivity : FragmentActivity() {
 
 
         loadFragment(bulletinFragment)
+
+        val workRequest = PeriodicWorkRequestBuilder<OddCheckerWorker>(1, TimeUnit.DAYS).build()
+        WorkManager.getInstance(this).enqueue(workRequest)
 
 
 

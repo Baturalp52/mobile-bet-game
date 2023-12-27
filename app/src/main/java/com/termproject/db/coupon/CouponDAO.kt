@@ -6,6 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
+import com.termproject.utils.CouponStatus
 
 @Dao
 interface CouponDAO {
@@ -24,12 +25,23 @@ interface CouponDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun newTeam(team: Team): Long
 
+    @Update
+    fun updateBet(bet: PlayedBet)
+
+    @Update
+    fun updateCoupon(coupon: Coupon)
+
     @Query("SELECT * FROM teams WHERE teamId =:id")
     fun getTeamByTeamId(id: Long): Team
 
     @Transaction
-    @Query("SELECT * FROM coupons")
+    @Query("SELECT * FROM coupons ORDER BY id DESC")
     fun getAllCoupons(): List<CouponWithPlayedGames>
+
+
+    @Transaction
+    @Query("SELECT * FROM coupons WHERE status = 'PENDING'")
+    fun getPendingCoupons(): List<CouponWithPlayedGames>
 
     @Transaction
     @Query("SELECT * FROM coupons WHERE id = :couponId")

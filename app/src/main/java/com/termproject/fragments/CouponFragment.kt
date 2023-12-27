@@ -157,7 +157,7 @@ class CouponFragment(
     inner class CustomGesture : GestureDetector.SimpleOnGestureListener() {
 
         override fun onLongPress(e: MotionEvent) {
-            Log.i("gesturebro", "onLongPress")
+
         }
 
         override fun onFling(
@@ -166,12 +166,12 @@ class CouponFragment(
             velocityX: Float,
             velocityY: Float
         ): Boolean {
-            Log.i("gesturebro", "onFling")
+
             return false
         }
 
         override fun onDoubleTapEvent(e: MotionEvent): Boolean {
-            Log.i("gesturebro", "onDoubleTapEvent")
+        
             return true
         }
     }
