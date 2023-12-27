@@ -44,9 +44,11 @@ class AllCouponsRecyclerViewAdapter(
 
         val playedDate = localDateTime.format(formatter)
 
-
-        val totalOdd =
-            coupon.playedGames.map { it -> it.playedBet.odd }.reduce { acc, d -> acc * d }
+        var totalOdd: Double? = null
+        if(!coupon.playedGames.map { it -> it.playedBet.odd }.isEmpty())
+            totalOdd = coupon.playedGames.map { it -> it.playedBet.odd }.reduce { acc, d -> acc * d }
+        else
+            totalOdd = 1.0
 
         myRecyclerViewItemHolder.allCouponsDate.text = playedDate
         myRecyclerViewItemHolder.allCouponsMatchCount.text =
