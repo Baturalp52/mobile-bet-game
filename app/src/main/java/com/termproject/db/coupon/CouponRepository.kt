@@ -1,8 +1,5 @@
 package com.termproject.db.coupon
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-
 class CouponRepository(private val couponDAO: CouponDAO) {
 
 
@@ -31,6 +28,17 @@ class CouponRepository(private val couponDAO: CouponDAO) {
         return couponDAO.getAllCoupons()
     }
 
+    fun getPendingCoupons(): List<CouponWithPlayedGames> {
+        return couponDAO.getPendingCoupons()
+    }
+
+    fun updateBet(bet: PlayedBet) {
+        couponDAO.updateBet(bet)
+    }
+
+    fun updateCoupon(coupon: Coupon) {
+        couponDAO.updateCoupon(coupon)
+    }
 
     fun getTeamByTeamId(teamId: Long): Team {
         return couponDAO.getTeamByTeamId(teamId)
