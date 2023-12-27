@@ -41,6 +41,10 @@ class CouponViewModel(application: Application) : AndroidViewModel(application) 
         return withContext(Dispatchers.IO) { repository.getAllCoupons() }
     }
 
+    suspend fun getPendingCoupons(): List<CouponWithPlayedGames> {
+        return withContext(Dispatchers.IO) { repository.getPendingCoupons() }
+    }
+
 
     fun playCoupon(amount: Int) {
         // You can now use the database instance to perform database operations

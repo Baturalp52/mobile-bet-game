@@ -11,7 +11,7 @@ class PlayedBet(
     val betValue: String,
     val betName: String,
     val odd: Double,
-    val status: BetStatus
+    var status: BetStatus
 ) {
 
     override fun toString(): String {

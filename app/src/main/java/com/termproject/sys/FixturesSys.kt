@@ -46,8 +46,6 @@ class FixturesSys {
 
                     if (response.isSuccessful) {
                         fixtures = ArrayList(response.body()?.response).filter { it ->
-                            if (Constants.leagues.contains(it.league.id))
-                                Log.d("FIXTURE", "$it")
                             Constants.leagues.contains(it.league.id)
                         }.toMutableList()
 

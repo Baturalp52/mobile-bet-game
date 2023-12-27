@@ -45,8 +45,9 @@ class AllCouponsRecyclerViewAdapter(
         val playedDate = localDateTime.format(formatter)
 
         var totalOdd: Double? = null
-        if(!coupon.playedGames.map { it -> it.playedBet.odd }.isEmpty())
-            totalOdd = coupon.playedGames.map { it -> it.playedBet.odd }.reduce { acc, d -> acc * d }
+        if (!coupon.playedGames.map { it -> it.playedBet.odd }.isEmpty())
+            totalOdd =
+                coupon.playedGames.map { it -> it.playedBet.odd }.reduce { acc, d -> acc * d }
         else
             totalOdd = 1.0
 
@@ -56,10 +57,13 @@ class AllCouponsRecyclerViewAdapter(
         myRecyclerViewItemHolder.allCouponsAmount.text = "${coupon.coupon.amount} "
         myRecyclerViewItemHolder.allCouponsOdd.text =
             "${String.format("%.2f", totalOdd)} "
+
         if (coupon.coupon.status == CouponStatus.LOSE) {
             myRecyclerViewItemHolder.allCouponsWinLose.setImageResource(R.drawable.rounded_block)
         } else if (coupon.coupon.status == CouponStatus.PENDING) {
             myRecyclerViewItemHolder.allCouponsWinLose.setImageResource(R.drawable.baseline_access_time_filled_24)
+        } else {
+            myRecyclerViewItemHolder.allCouponsWinLose.setImageResource(R.drawable.baseline_check_circle_24)
         }
 
 
