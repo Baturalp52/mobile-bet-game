@@ -8,7 +8,7 @@ import com.termproject.Constants
 class SystemVariable(
     @PrimaryKey
     var name:String,
-    var value:String
+    var value: String? = null
 ) {
 
 }

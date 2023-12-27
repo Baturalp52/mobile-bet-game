@@ -9,12 +9,12 @@ class SystemRepository(private val systemDAO: SystemDAO) {
         systemDAO.insertVariable(variable)
     }
 
-    fun getOddsUpdateDate() {
-        systemDAO.getOddsUpdateDate()
+    fun getOddsUpdateDate() : String{
+        return systemDAO.getOddsUpdateDate()
     }
 
-    fun getFixturesUpdateDate() {
-        systemDAO.getFixturesUpdateDate()
+    fun getFixturesUpdateDate() : String {
+        return systemDAO.getFixturesUpdateDate()
     }
 
     fun setOddsUpdateDate(date: String) {

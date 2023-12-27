@@ -28,16 +28,12 @@ class SystemViewModel(application:Application):AndroidViewModel(application) {
         }
     }
 
-    fun getOddsUpdateDate() {
-        viewModelScope.launch(Dispatchers.IO){ // that code will be run in background thread, coroutine scope
-            repository.getOddsUpdateDate()
-        }
+    fun getOddsUpdateDate() : String{
+        return repository.getOddsUpdateDate()
     }
 
-    fun getFixturesUpdateDate() {
-        viewModelScope.launch(Dispatchers.IO){ // that code will be run in background thread, coroutine scope
-            repository.getFixturesUpdateDate()
-        }
+    fun getFixturesUpdateDate() : String{
+        return repository.getFixturesUpdateDate()
     }
 
     fun setOddsUpdate(date: String) {

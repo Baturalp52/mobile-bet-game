@@ -89,5 +89,6 @@ dependencies {
     api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.5")
     api("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.5")
 
-  
+    val worker_version="2.7.1"
+    implementation ("androidx.work:work-runtime:$worker_version")
 }

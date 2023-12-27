@@ -2,6 +2,8 @@ package com.termproject
 
 import android.util.Log
 import android.widget.Toast
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ViewModelProvider
 import com.berkberaozer.hw2.ApiKeyViewModel
 import com.berkberaozer.hw2.CouponViewModel
 import com.google.gson.Gson
@@ -10,6 +12,7 @@ import com.termproject.classes.FixtureResponse
 import com.termproject.classes.FixturesNOdds
 import com.termproject.classes.Odds
 import com.termproject.database.FixtureDataViewModel
+import com.termproject.database.SystemViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,40 +21,23 @@ import java.time.format.DateTimeFormatter
 import java.util.Collections
 
 
-object FixturesSys {
-    //private lateinit var fixtureView: FixtureDataViewModel
-    //private lateinit var apiKeyView: ApiKeyViewModel
-    //private lateinit var couponView: CouponViewModel
+class FixturesSys {
+    private lateinit var fixtureView: FixtureDataViewModel
+    private lateinit var apiKeyView: ApiKeyViewModel
+    private lateinit var couponView: com.termproject.db.coupon.CouponViewModel
+    private lateinit var systemView: SystemViewModel
     var fixtures: List<Fixture> = ArrayList<Fixture>()
+
     //private lateinit var odds: List<Odds>
 
     fun prepareData(adapter: FixturesRecyclerViewAdapter) {
+//
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
         val current = LocalDateTime.now().format(formatter)
 
-        var getService = ApiClient.getClient().create(GetService::class.java)
-        var fixturesRequest = getService.getFixtures(getApiKey(), "2023", current) //203 = Süper Lig
 
 
-        fixturesRequest.enqueue(object : Callback<FixtureResponse> {
-            override fun onFailure(call: Call<FixtureResponse>, t: Throwable) {
-                Log.e("REQUEST_ERROR", t.message.toString())
-            }
 
-            override fun onResponse(
-                call: Call<FixtureResponse>,
-                response: Response<FixtureResponse>
-            ) {
-                if (response.isSuccessful) {
-                    fixtures = response.body()?.response!!
-                    Log.d("RESPONSE", response.body()?.response.toString())
-                    adapter.notifyDataSetChanged()
-                }
-            }
-        })
-//fixtureView = ViewModelProvider(this).get(FixtureDataViewModel::class.java)
-//apiKeyView = ViewModelProvider(this).get(ApiKeyViewModel::class.java)
-//couponView = ViewModelProvider(this).get(CouponViewModel::class.java)
         //        Log.d("JSONARRAYPARSE", "Before Request")
         //        fixturesRequest.enqueue(object : Callback<FixtureResponse> {
         //            override fun onFailure(call: Call<FixtureResponse>, t: Throwable) {

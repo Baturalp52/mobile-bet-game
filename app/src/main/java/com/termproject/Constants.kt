@@ -14,5 +14,5 @@ object Constants {
     var leagues: ArrayList<Int> =
         arrayListOf(4, 21, 61, 71, 39, 78, 135, 88, 140, 2, 203, 206, 66, 63)
     var bets: List<Int> = listOf(1, 5, 8, 10)
-    val apiKey = "2513a1a8f6651498fa33fa0a17d7c215"
+    val apiKey = "b939c30d3265119631fab5db9944311d"
 }
