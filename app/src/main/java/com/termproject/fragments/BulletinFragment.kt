@@ -1,5 +1,6 @@
 package com.termproject.fragments
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.termproject.FixturesRecyclerViewAdapter
+import com.termproject.R
 import com.termproject.sys.FixturesSys
 import com.termproject.databinding.FragmentBulletinBinding
 
@@ -24,7 +26,6 @@ class BulletinFragment() : Fragment() {
         super.onCreate(savedInstanceState)
 
         binding = FragmentBulletinBinding.inflate(layoutInflater)
-
 
     }
 

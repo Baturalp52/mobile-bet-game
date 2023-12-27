@@ -2,6 +2,7 @@ package com.termproject
 
 import android.content.Context
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.AttributeSet
 import android.view.View
@@ -27,10 +28,12 @@ class MainActivity : FragmentActivity() {
     private lateinit var couponViewModel: CouponViewModel
     private lateinit var creditDialog: CreditDialog
     lateinit var existingUser: User
+    lateinit var mediaPlayer: MediaPlayer
 
     override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
         CoroutineScope(Dispatchers.Main).launch {
             existingUser = userViewModel.getUser()
+
 
             if (existingUser == null) {
                 existingUser = User(
@@ -54,10 +57,15 @@ class MainActivity : FragmentActivity() {
         return super.onCreateView(name, context, attrs)
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        mediaPlayer = MediaPlayer.create(this, R.raw.freed_from_desire)
+        mediaPlayer.start()
+
 
         userViewModel = ViewModelProvider(this)?.get(UserViewModel::class.java)!!
         couponViewModel = ViewModelProvider(this)?.get(CouponViewModel::class.java)!!

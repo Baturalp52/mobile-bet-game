@@ -18,6 +18,8 @@ import com.termproject.FixturesRecyclerViewAdapter
 import com.termproject.R
 import com.termproject.databinding.FragmentCouponBinding
 import com.termproject.databinding.FragmentCouponsBinding
+import kotlin.math.round
+import kotlin.math.roundToInt
 
 
 /**
@@ -52,6 +54,9 @@ class CouponsFragment : Fragment() {
         gDetector = GestureDetectorCompat(requireContext(), CustomGesture())
 
         recyclerView.adapter = adapter
+        val rate:Double = adapter.calculateRate()
+
+        binding.maxRate.text = (round(rate*100)/100.0).toString()
         return binding.root
     }
     private fun setupRecyclerView() {
@@ -73,6 +78,8 @@ class CouponsFragment : Fragment() {
         val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
         itemTouchHelper.attachToRecyclerView(binding.CouponRecyclerView)
     }
+
+
 
     inner class CustomGesture: GestureDetector.SimpleOnGestureListener() {
 

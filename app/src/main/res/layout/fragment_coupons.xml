@@ -111,6 +111,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/top_nav_button"
                 android:text="@string/btn_play_label" />
+
         </LinearLayout>
 
     </LinearLayout>
@@ -118,6 +119,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/CouponRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:hapticFeedbackEnabled="false" />
 
 </LinearLayout>

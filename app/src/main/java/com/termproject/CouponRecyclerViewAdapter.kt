@@ -28,6 +28,17 @@ class CouponRecyclerViewAdapter(
     override fun onBindViewHolder(myRecyclerViewItemHolder: CustomRecyclerViewItemHolder, i: Int) {
         val bet = BetDetails("Fenerbahçe - Galatasaray","Bugün 19:00", "Match Result:", "2", 1.98)
 
+
+        val maxRateArr = ArrayList<Double>()
+        maxRateArr.add(bet.tvOdd)
+        maxRateArr.add(bet.tvOdd)
+        maxRateArr.add(bet.tvOdd)
+
+
+
+
+
+
         val formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy HH:mm")
         val parser = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX")
 
@@ -57,7 +68,6 @@ class CouponRecyclerViewAdapter(
         var tvBetValue: TextView
         var tvOdd: TextView
         var parentLayout: LinearLayout
-
         init {
 
             tvMatchDetails = itemView.findViewById(R.id.tvMatchDetails)
@@ -67,6 +77,8 @@ class CouponRecyclerViewAdapter(
             tvOdd = itemView.findViewById(R.id.tvOdd)
             parentLayout = itemView.findViewById(R.id.couponLinearLayout)
         }
+
+
     }
     class BetDetails(
         var tvMatchDetails: String,
@@ -75,5 +87,24 @@ class CouponRecyclerViewAdapter(
         var tvBetValue: String,
         var tvOdd: Double
     )
+
+     fun calculateRate():Double {
+        // Check if the array is not empty
+         val bet = BetDetails("Fenerbahçe - Galatasaray","Bugün 19:00", "Match Result:", "2", 1.98)
+
+         val maxRateArr = ArrayList<Double>()
+         maxRateArr.add(bet.tvOdd)
+         maxRateArr.add(bet.tvOdd)
+         maxRateArr.add(bet.tvOdd)
+
+         if (maxRateArr.isNotEmpty()) {
+            return maxRateArr.reduce { acc, element -> acc * element }
+        }
+        return 0.0
+    }
+
+    fun calculateProfit(balance:Double, rate:Double):Double{
+        return balance * rate
+    }
 
 }
