@@ -1,16 +1,15 @@
 package com.termproject.fragments
 
-import android.R
-import androidx.appcompat.app.AppCompatActivity
+
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.termproject.MainActivity
 import com.termproject.MatchDetailRecyclerViewAdapter
-import com.termproject.classes.Value
+import com.termproject.R
 import com.termproject.databinding.FragmentMatchDetailBinding
 import com.termproject.db.coupon.CouponViewModel
 import com.termproject.db.coupon.PlayedBet
@@ -43,6 +42,12 @@ class MatchDetailFragment(
             it.homeTeam.teamId == homeTeam.teamId && it.awayTeam.teamId == awayTeam.teamId
         }
 
+
+        binding.matchDetailToolbar.title = "${homeTeam.teamName} - ${awayTeam.teamName}"
+        binding.matchDetailToolbar.setNavigationOnClickListener {
+            (context as MainActivity).loadFragment((context as MainActivity).bulletinFragment)
+        }
+
         if (playedGame != null)
             selectedBet = playedGame!!.playedBet
 
@@ -60,6 +65,7 @@ class MatchDetailFragment(
     }
 
     fun playBet(playedBet: PlayedBet) {
+
         couponViewModel.addGame(
             PlayedGameWithDetails(
                 playedGame = PlayedGame(
@@ -70,6 +76,7 @@ class MatchDetailFragment(
                 awayTeam = awayTeam
             )
         )
+        (context as MainActivity).updateBadge()
 
     }
 

@@ -56,6 +56,8 @@ class BulletinFragment(val context: MainActivity, val couponViewModel: CouponVie
 
         recyclerView.adapter = adapter
 
+        context.updateBadge()
+
         return binding.root
     }
 

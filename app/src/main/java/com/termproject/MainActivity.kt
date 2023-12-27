@@ -5,6 +5,7 @@ import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -14,8 +15,8 @@ import com.termproject.db.coupon.CouponViewModel
 import com.termproject.db.user.User
 import com.termproject.db.user.UserViewModel
 import com.termproject.fragments.BulletinFragment
+import com.termproject.fragments.AllCouponsFragment
 import com.termproject.fragments.CouponFragment
-import com.termproject.fragments.CouponsFragment
 import com.termproject.ui.CreditDialog
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -29,6 +30,9 @@ class MainActivity : FragmentActivity() {
     private lateinit var creditDialog: CreditDialog
     lateinit var existingUser: User
     lateinit var mediaPlayer: MediaPlayer
+    lateinit var bulletinFragment: BulletinFragment
+    lateinit var couponFragment: CouponFragment
+    lateinit var allCouponsFragment: AllCouponsFragment
 
     override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
         CoroutineScope(Dispatchers.Main).launch {
@@ -52,6 +56,7 @@ class MainActivity : FragmentActivity() {
 
 
         }
+        
 
         return super.onCreateView(name, context, attrs)
     }
@@ -69,32 +74,35 @@ class MainActivity : FragmentActivity() {
         userViewModel = ViewModelProvider(this)?.get(UserViewModel::class.java)!!
         couponViewModel = ViewModelProvider(this)?.get(CouponViewModel::class.java)!!
 
+        bulletinFragment = BulletinFragment(this, couponViewModel)
+        couponFragment = CouponFragment(this, couponViewModel, userViewModel)
+        allCouponsFragment = AllCouponsFragment()
 
 
 
+        loadFragment(bulletinFragment)
 
-        loadFragment(BulletinFragment(this, couponViewModel))
 
 
         binding.bottomNav.setOnItemSelectedListener { it ->
             when (it.itemId) {
                 R.id.bulletin -> {
-                    loadFragment(BulletinFragment(this, couponViewModel))
+                    loadFragment(bulletinFragment)
                     true
                 }
 
                 R.id.coupon -> {
-                    loadFragment(CouponFragment())
+                    loadFragment(couponFragment)
                     true
                 }
 
-                R.id.coupons -> {
-                    loadFragment(CouponsFragment(this, couponViewModel, userViewModel))
+                R.id.all_coupons -> {
+                    loadFragment(allCouponsFragment)
                     true
                 }
 
                 else -> {
-                    loadFragment(BulletinFragment(this, couponViewModel))
+                    loadFragment(bulletinFragment)
                     true
                 }
             }
@@ -112,6 +120,17 @@ class MainActivity : FragmentActivity() {
         }
     }
 
+    fun updateBadge() {
+
+        val badge = binding.bottomNav.getOrCreateBadge(R.id.coupon)
+        if (couponViewModel.coupon.playedGames.size > 0) {
+            badge.isVisible = true
+            badge.number = couponViewModel.coupon.playedGames.size
+        } else {
+            badge.isVisible = false
+        }
+
+    }
 
     fun loadFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
