@@ -5,18 +5,24 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.termproject.db.converters.DateConverter
 
 @Database(
     entities = [Coupon::class, PlayedBet::class, PlayedGame::class, Team::class],
-    version = 4,
+    version = 7,
     exportSchema = false
 )
 @TypeConverters(DateConverter::class)
 abstract class CouponRoomDatabase : RoomDatabase() {
+
+
     abstract fun couponDao(): CouponDAO
 
     companion object {
+
+
         @Volatile  //it makes that instance to visible to other threads
         private var INSTANCE: CouponRoomDatabase? = null
 
@@ -34,7 +40,7 @@ abstract class CouponRoomDatabase : RoomDatabase() {
                     context.applicationContext,
                     CouponRoomDatabase::class.java,
                     "coupons"
-                ).build()
+                ).fallbackToDestructiveMigration().build()
                 INSTANCE = instance
                 return instance
             }

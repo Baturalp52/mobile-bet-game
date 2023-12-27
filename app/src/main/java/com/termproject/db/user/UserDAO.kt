@@ -17,4 +17,7 @@ interface UserDAO {
 
     @Query("SELECT * FROM users LIMIT 1")
     suspend fun getUser(): User
+
+    @Query("UPDATE users SET credit = credit - :amount")
+    fun reduceCredit(amount: Int)
 }

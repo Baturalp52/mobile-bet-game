@@ -5,6 +5,7 @@ import kotlinx.coroutines.withContext
 
 class CouponRepository(private val couponDAO: CouponDAO) {
 
+
     fun newCoupon(coupon: Coupon): Long {
         return couponDAO.newCoupon(coupon)
     }
@@ -25,6 +26,7 @@ class CouponRepository(private val couponDAO: CouponDAO) {
     fun getCouponById(couponId: Long): CouponWithPlayedGames {
         return couponDAO.getCouponById(couponId)
     }
+
 
     fun getTeamByTeamId(teamId: Long): Team {
         return couponDAO.getTeamByTeamId(teamId)
