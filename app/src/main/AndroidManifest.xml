@@ -18,8 +18,12 @@
             android:name=".MatchDetailActivity"
             android:exported="false" />
         <activity
+            android:name=".CouponDetail"
+            android:exported="false" />
+        <activity
             android:name=".ProfileActivity"
             android:exported="false" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">

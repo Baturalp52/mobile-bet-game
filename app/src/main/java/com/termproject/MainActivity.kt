@@ -30,9 +30,9 @@ class MainActivity : FragmentActivity() {
 
     override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
         CoroutineScope(Dispatchers.Main).launch {
-            existingUser = userViewModel.getUser()
+            val user = userViewModel.getUser()
 
-            if (existingUser == null) {
+            if (user == null) {
                 existingUser = User(
                     name = "New",
                     surname = "User",
@@ -43,6 +43,7 @@ class MainActivity : FragmentActivity() {
                 existingUser.credit = 1000
                 userViewModel.createNewUser(existingUser)
             } else {
+                existingUser = user
             }
             binding.profileButton.text = "${existingUser.name} ${existingUser.surname}"
 

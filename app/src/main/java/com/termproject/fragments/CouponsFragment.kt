@@ -16,8 +16,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.termproject.CouponRecyclerViewAdapter
 import com.termproject.FixturesRecyclerViewAdapter
 import com.termproject.R
-import com.termproject.databinding.FragmentCouponBinding
 import com.termproject.databinding.FragmentCouponsBinding
+
 
 
 /**

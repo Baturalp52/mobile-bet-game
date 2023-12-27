@@ -5,31 +5,37 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.termproject.R
-import com.termproject.databinding.FragmentCouponBinding
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.termproject.allCouponsRecyclerViewAdapter
+import com.termproject.databinding.FragmentAllCouponsBinding
+import com.termproject.databinding.FragmentCouponsBinding
 
-
-/**
- * A simple [Fragment] subclass.
- * Use the [CouponFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class CouponFragment : Fragment() {
-    lateinit var binding: FragmentCouponBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    
-    }
+    private lateinit var binding: FragmentAllCouponsBinding
+    private lateinit var adapter: allCouponsRecyclerViewAdapter
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        binding = FragmentCouponBinding.inflate(layoutInflater)
+    ): View {
+        binding = FragmentAllCouponsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupRecyclerView()
+    }
 
+    private fun setupRecyclerView() {
+        val recyclerView = binding.allCRecyclerView
+        val layoutManager = LinearLayoutManager(requireContext())
+
+        recyclerView.layoutManager = layoutManager
+
+        // Initialize your adapter here with proper data
+        adapter = allCouponsRecyclerViewAdapter(requireContext())
+        recyclerView.adapter = adapter
+    }
 }
