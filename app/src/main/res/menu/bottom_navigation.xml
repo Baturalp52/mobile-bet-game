@@ -12,7 +12,7 @@
         android:icon="@drawable/coupon_icon"
         android:title="@string/your_coupon" />
     <item
-        android:id="@+id/coupons"
+        android:id="@+id/all_coupons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:enabled="true"

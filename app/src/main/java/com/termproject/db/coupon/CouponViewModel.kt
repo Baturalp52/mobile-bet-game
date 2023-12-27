@@ -73,7 +73,18 @@ class CouponViewModel(application: Application) : AndroidViewModel(application) 
                 )
 
             }
+
+            coupon = CouponWithPlayedGames(
+                coupon = Coupon(
+                    status = CouponStatus.PENDING
+                ),
+                playedGames = ArrayList()
+            )
+
+
         }
+
+
     }
 
 
