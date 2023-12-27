@@ -10,8 +10,10 @@ import androidx.room.Update
 @Dao
 interface CouponDAO {
 
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun newCoupon(coupon: Coupon): Long
+
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun newPlayedGame(playedGame: PlayedGame): Long
