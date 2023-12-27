@@ -66,13 +66,13 @@ class MainActivity : FragmentActivity() {
 
 
 
-        loadFragment(BulletinFragment())
+        loadFragment(BulletinFragment(this, couponViewModel))
 
 
         binding.bottomNav.setOnItemSelectedListener { it ->
             when (it.itemId) {
                 R.id.bulletin -> {
-                    loadFragment(BulletinFragment())
+                    loadFragment(BulletinFragment(this, couponViewModel))
                     true
                 }
 
@@ -82,12 +82,12 @@ class MainActivity : FragmentActivity() {
                 }
 
                 R.id.coupons -> {
-                    loadFragment(CouponsFragment())
+                    loadFragment(CouponsFragment(this, couponViewModel, userViewModel))
                     true
                 }
 
                 else -> {
-                    loadFragment(BulletinFragment())
+                    loadFragment(BulletinFragment(this, couponViewModel))
                     true
                 }
             }
@@ -106,7 +106,7 @@ class MainActivity : FragmentActivity() {
     }
 
 
-    private fun loadFragment(fragment: Fragment) {
+    fun loadFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_container, fragment)
         transaction.commit()
