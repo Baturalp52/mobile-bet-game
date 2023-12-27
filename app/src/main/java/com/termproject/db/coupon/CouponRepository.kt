@@ -27,6 +27,10 @@ class CouponRepository(private val couponDAO: CouponDAO) {
         return couponDAO.getCouponById(couponId)
     }
 
+    fun getAllCoupons(): List<CouponWithPlayedGames> {
+        return couponDAO.getAllCoupons()
+    }
+
 
     fun getTeamByTeamId(teamId: Long): Team {
         return couponDAO.getTeamByTeamId(teamId)
