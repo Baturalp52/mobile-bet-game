@@ -4,17 +4,10 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
 import com.termproject.db.coupon.PlayedGameWithDetails
-import com.termproject.sys.OddsSys
-import java.time.LocalDateTime
-import java.time.ZoneId
-import java.time.ZonedDateTime
-import java.time.format.DateTimeFormatter
 
 class CouponRecyclerViewAdapter(
     private val context: Context,
@@ -45,7 +38,6 @@ class CouponRecyclerViewAdapter(
 
     }
 
-
     override fun getItemCount(): Int {
         return playedGamesWithDetails.size
     }
@@ -69,7 +61,6 @@ class CouponRecyclerViewAdapter(
             parentLayout = itemView.findViewById(R.id.couponLinearLayout)
         }
     }
-
     class BetDetails(
         var tvMatchDetails: String,
         var tvDate: String,
