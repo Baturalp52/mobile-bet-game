@@ -6,12 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.termproject.allCouponsRecyclerViewAdapter
+import com.termproject.AllCouponsRecyclerViewAdapter
 import com.termproject.databinding.FragmentAllCouponsBinding
+import com.termproject.db.coupon.CouponViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class AllCouponsFragment : Fragment() {
+class AllCouponsFragment(private val couponViewModel: CouponViewModel) : Fragment() {
     private lateinit var binding: FragmentAllCouponsBinding
-    private lateinit var adapter: allCouponsRecyclerViewAdapter
+    private lateinit var adapter: AllCouponsRecyclerViewAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,8 +37,18 @@ class AllCouponsFragment : Fragment() {
 
         recyclerView.layoutManager = layoutManager
 
-        // Initialize your adapter here with proper data
-        adapter = allCouponsRecyclerViewAdapter(requireContext())
-        recyclerView.adapter = adapter
+        CoroutineScope(Dispatchers.Main).launch {
+
+
+            // Initialize your adapter here with proper data
+            adapter =
+                AllCouponsRecyclerViewAdapter(
+                    requireContext(),
+                    couponViewModel.getAllCoupons()
+                )
+            recyclerView.adapter = adapter
+        }
+
+
     }
 }

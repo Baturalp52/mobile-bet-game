@@ -56,7 +56,7 @@ class MainActivity : FragmentActivity() {
 
 
         }
-        
+
 
         return super.onCreateView(name, context, attrs)
     }
@@ -76,7 +76,7 @@ class MainActivity : FragmentActivity() {
 
         bulletinFragment = BulletinFragment(this, couponViewModel)
         couponFragment = CouponFragment(this, couponViewModel, userViewModel)
-        allCouponsFragment = AllCouponsFragment()
+        allCouponsFragment = AllCouponsFragment(couponViewModel)
 
 
 

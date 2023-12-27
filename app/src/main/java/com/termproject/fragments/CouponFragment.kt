@@ -21,9 +21,6 @@ import com.termproject.R
 import com.termproject.databinding.FragmentCouponBinding
 import com.termproject.db.coupon.CouponViewModel
 import com.termproject.db.user.UserViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 
 /**
@@ -89,7 +86,7 @@ class CouponFragment(
 
             maxRate = 0.0
             updateRateWin()
-            
+
             context.loadFragment(context.bulletinFragment)
 
             context.binding.bottomNav.selectedItemId = R.id.bulletin

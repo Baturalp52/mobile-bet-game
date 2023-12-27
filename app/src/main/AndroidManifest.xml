@@ -16,7 +16,7 @@
         android:theme="@style/Theme.TermProject"
         tools:targetApi="31">
         <activity
-            android:name=".CouponDetail"
+            android:name=".fragments.CouponDetailFragment"
             android:exported="false" />
         <activity
             android:name=".ProfileActivity"
