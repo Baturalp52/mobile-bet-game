@@ -9,11 +9,16 @@ class PlayedBet(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val betId: Int,
     val betValue: String,
+    val betName: String,
     val odd: Double,
     val status: BetStatus
 ) {
 
     override fun toString(): String {
-        return "PlayedBet betId=$betId betValue=$betValue odd=$odd status=$status"
+        return "PlayedBet betId=$betId betName=$betName betValue=$betValue odd=$odd status=$status"
+    }
+
+    override fun equals(other: Any?): Boolean {
+        return betId == (other as PlayedBet).betId
     }
 }

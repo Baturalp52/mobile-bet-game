@@ -2,6 +2,7 @@ package com.termproject
 
 import android.content.Context
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.AttributeSet
 import android.view.View
@@ -27,12 +28,14 @@ class MainActivity : FragmentActivity() {
     private lateinit var couponViewModel: CouponViewModel
     private lateinit var creditDialog: CreditDialog
     lateinit var existingUser: User
+    lateinit var mediaPlayer: MediaPlayer
 
     override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
         CoroutineScope(Dispatchers.Main).launch {
-            val user = userViewModel.getUser()
+            existingUser = userViewModel.getUser()
 
-            if (user == null) {
+
+            if (existingUser == null) {
                 existingUser = User(
                     name = "New",
                     surname = "User",
@@ -42,8 +45,6 @@ class MainActivity : FragmentActivity() {
                 )
                 existingUser.credit = 1000
                 userViewModel.createNewUser(existingUser)
-            } else {
-                existingUser = user
             }
             binding.profileButton.text = "${existingUser.name} ${existingUser.surname}"
 
@@ -55,10 +56,15 @@ class MainActivity : FragmentActivity() {
         return super.onCreateView(name, context, attrs)
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        mediaPlayer = MediaPlayer.create(this, R.raw.freed_from_desire)
+        mediaPlayer.start()
+
 
         userViewModel = ViewModelProvider(this)?.get(UserViewModel::class.java)!!
         couponViewModel = ViewModelProvider(this)?.get(CouponViewModel::class.java)!!
@@ -67,13 +73,13 @@ class MainActivity : FragmentActivity() {
 
 
 
-        loadFragment(BulletinFragment())
+        loadFragment(BulletinFragment(this, couponViewModel))
 
 
         binding.bottomNav.setOnItemSelectedListener { it ->
             when (it.itemId) {
                 R.id.bulletin -> {
-                    loadFragment(BulletinFragment())
+                    loadFragment(BulletinFragment(this, couponViewModel))
                     true
                 }
 
@@ -83,12 +89,12 @@ class MainActivity : FragmentActivity() {
                 }
 
                 R.id.coupons -> {
-                    loadFragment(CouponsFragment())
+                    loadFragment(CouponsFragment(this, couponViewModel, userViewModel))
                     true
                 }
 
                 else -> {
-                    loadFragment(BulletinFragment())
+                    loadFragment(BulletinFragment(this, couponViewModel))
                     true
                 }
             }
@@ -107,7 +113,7 @@ class MainActivity : FragmentActivity() {
     }
 
 
-    private fun loadFragment(fragment: Fragment) {
+    fun loadFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_container, fragment)
         transaction.commit()

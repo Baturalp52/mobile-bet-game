@@ -2,25 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/oddValueLinearLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:foregroundGravity="center"
     android:gravity="center"
-    android:orientation="vertical">
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:padding="5dp">
 
     <TextView
-        android:id="@+id/matchKey"
+        android:id="@+id/tvOddName"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:gravity="center"
         android:text="TextView"
         android:textAlignment="center" />
 
-    <Button
-        android:id="@+id/button"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnOddSelect"
+        android:textSize="12dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#696969"
         android:text="Button" />
 
 </LinearLayout>

@@ -19,8 +19,6 @@ interface GetService {
     @GET("odds")
     fun getOdds(
         @Header("x-apisports-key") apiKey: String,
-        @Query("season") season: String,
-        @Query("date") date: String,
         @Query("fixture") fixture: String,
         @Query("bookmaker") bookmaker: Int = 6,
     ): Call<OddResponse>
