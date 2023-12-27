@@ -45,7 +45,6 @@ class MainActivity : FragmentActivity() {
                 )
                 existingUser.credit = 1000
                 userViewModel.createNewUser(existingUser)
-            } else {
             }
             binding.profileButton.text = "${existingUser.name} ${existingUser.surname}"
 

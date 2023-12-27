@@ -104,7 +104,6 @@ class CouponsFragment(
 
         return binding.root
     }
-
     private fun setupRecyclerView() {
         // ... existing RecyclerView setup ...
 
@@ -146,7 +145,6 @@ class CouponsFragment(
             Log.i("gesturebro", "onFling")
             return false
         }
-
         override fun onDoubleTapEvent(e: MotionEvent): Boolean {
             Log.i("gesturebro", "onDoubleTapEvent")
             return true
