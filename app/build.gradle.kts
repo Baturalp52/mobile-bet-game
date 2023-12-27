@@ -8,6 +8,10 @@ android {
     namespace = "com.termproject"
     compileSdk = 34
 
+    lint {
+        baseline = file("lint-baseline.xml")
+    }
+
     defaultConfig {
         applicationId = "com.termproject"
         minSdk = 26

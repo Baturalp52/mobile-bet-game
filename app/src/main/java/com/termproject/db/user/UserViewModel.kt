@@ -36,6 +36,12 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun deleteUsers(){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteUsers()
+        }
+    }
+
     suspend fun getUser(): User {
         val deferred: Deferred<User> = viewModelScope.async {
             repository.getUser()
