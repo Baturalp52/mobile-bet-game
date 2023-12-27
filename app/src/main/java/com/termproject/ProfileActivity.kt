@@ -7,6 +7,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.termproject.databinding.ActivityProfileBinding
@@ -28,11 +29,11 @@ class ProfileActivity : AppCompatActivity() {
             val existingUser = userViewModel.getUser()
 
             if (existingUser != null) {
-                binding.etName.setText(existingUser.name)
-                binding.etSurname.setText(existingUser.surname)
-                binding.etCity.setText(existingUser.city)
-                binding.etTeam.setText(existingUser.team)
-                binding.etDistrict.setText(existingUser.district)
+                binding.etName.editText?.setText(existingUser.name)
+                binding.etSurname.editText?.setText(existingUser.surname)
+                binding.etCity.editText?.setText(existingUser.city)
+                binding.etTeam.editText?.setText(existingUser.team)
+                binding.etDistrict.editText?.setText(existingUser.district)
             }
 
         }
@@ -49,39 +50,30 @@ class ProfileActivity : AppCompatActivity() {
         userViewModel = ViewModelProvider(this)?.get(UserViewModel::class.java)!!
 
         binding.profileBtn.setOnClickListener {
-            val name: String = binding.etName.text.toString()
-            val surname: String = binding.etSurname.text.toString()
-            val city: String = binding.etCity.text.toString()
-            val district: String = binding.etDistrict.text.toString()
-            val team: String = binding.etTeam.text.toString()
+            val name: String = binding.etName.editText?.text.toString()
+            val surname: String = binding.etSurname.editText?.text.toString()
+            val city: String = binding.etCity.editText?.text.toString()
+            val district: String = binding.etDistrict.editText?.text.toString()
+            val team: String = binding.etTeam.editText?.text.toString()
             CoroutineScope(Dispatchers.Main).launch {
                 val existingUser = userViewModel.getUser()
 
-                if (existingUser == null) {
-                    val user = User(
-                        name = name,
-                        surname = surname,
-                        city = city,
-                        district = district,
-                        team = team
-                    )
-                    user.credit = 1000
-                    userViewModel.createNewUser(user)
-                } else {
-                    existingUser.team = team
-                    existingUser.name = name
-                    existingUser.surname = surname
-                    existingUser.district = district
-                    existingUser.city = city
-                    userViewModel.updateUser(existingUser)
-                }
+                existingUser.team = team
+                existingUser.name = name
+                existingUser.surname = surname
+                existingUser.district = district
+                existingUser.city = city
+                userViewModel.updateUser(existingUser)
 
+                Toast.makeText(this@ProfileActivity, "Profile updated", Toast.LENGTH_SHORT).show()
+                // Finish the current activity and go back to the MainActivity
+                finish()
             }
 
 
         }
 
-        setSupportActionBar(binding.toolbar)
+        supportActionBar?.setTitle("Your Profile")
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 

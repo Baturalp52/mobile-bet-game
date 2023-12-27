@@ -11,6 +11,10 @@ class UserRepository(private val userDAO: UserDAO) {
         userDAO.newUser(user)
     }
 
+    fun reduceCredit(credit: Int) {
+        userDAO.reduceCredit(credit)
+    }
+
     fun updateUser(user: User) {
         userDAO.updateUser(user)
     }

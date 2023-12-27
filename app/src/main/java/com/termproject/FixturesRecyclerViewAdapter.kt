@@ -1,22 +1,28 @@
 package com.termproject
 
 import android.content.Context
-import android.util.Log
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import com.termproject.db.coupon.CouponViewModel
+import com.termproject.db.coupon.Team
+import com.termproject.fragments.MatchDetailFragment
+import com.termproject.sys.FixturesSys
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
 class FixturesRecyclerViewAdapter(
-    private val context: Context
+    private val context: MainActivity,
+    val couponViewModel: CouponViewModel
 ) :
     RecyclerView.Adapter<FixturesRecyclerViewAdapter.CustomRecyclerViewItemHolder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): CustomRecyclerViewItemHolder {
@@ -48,9 +54,26 @@ class FixturesRecyclerViewAdapter(
 
 
         myRecyclerViewItemHolder.parentLayout.setOnClickListener {
+            val homeTeam = Team(
+                fixture.teams.home.id.toLong(),
+                fixture.teams.home.name,
+                fixture.teams.home.logo
+            )
+            val awayTeam = Team(
+                fixture.teams.away.id.toLong(),
+                fixture.teams.away.name,
+                fixture.teams.away.logo
+            )
 
+            context.loadFragment(
+                MatchDetailFragment(
+                    couponViewModel,
+                    fixture.fixture.id,
+                    homeTeam,
+                    awayTeam
+                )
+            )
         }
-
     }
 
     override fun getItemCount(): Int {
