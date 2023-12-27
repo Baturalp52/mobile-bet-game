@@ -27,17 +27,17 @@
 
                 <TextView
                     android:id="@+id/textView16"
-                    android:layout_width="120dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:text="@string/max_rate_label" />
 
                 <TextView
                     android:id="@+id/maxRate"
-                    android:layout_width="90dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView" />
+                    android:gravity="start" />
             </LinearLayout>
 
             <LinearLayout
@@ -50,7 +50,7 @@
                     android:id="@+id/textView21"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:text="@string/max_profit_label" />
 
                 <TextView
@@ -58,7 +58,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView" />
+                    android:gravity="start" />
             </LinearLayout>
 
 
