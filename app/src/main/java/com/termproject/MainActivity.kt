@@ -39,6 +39,7 @@ class MainActivity : FragmentActivity() {
 
     override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
         CoroutineScope(Dispatchers.Main).launch {
+            //userViewModel.deleteUsers()
             val user = userViewModel.getUser()
 
             if (user == null) {
@@ -130,9 +131,9 @@ class MainActivity : FragmentActivity() {
     fun updateBadge() {
 
         val badge = binding.bottomNav.getOrCreateBadge(R.id.coupon)
-        if (couponViewModel.coupon.playedGames.size > 0) {
+        if (couponViewModel.coupon?.playedGames?.size!! > 0) {
             badge.isVisible = true
-            badge.number = couponViewModel.coupon.playedGames.size
+            badge.number = couponViewModel.coupon?.playedGames!!.size
         } else {
             badge.isVisible = false
         }

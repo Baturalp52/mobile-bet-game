@@ -54,7 +54,7 @@ class CouponFragment(
         layoutManager!!.orientation = LinearLayoutManager.VERTICAL
         recyclerView.layoutManager = layoutManager
 
-        adapter = CouponRecyclerViewAdapter(requireContext(), couponViewModel.coupon.playedGames)
+        adapter = couponViewModel.coupon?.let { CouponRecyclerViewAdapter(requireContext(), it.playedGames) }!!
 
         setupRecyclerView()
         gDetector = GestureDetectorCompat(requireContext(), CustomGesture())
@@ -62,11 +62,11 @@ class CouponFragment(
         recyclerView.adapter = adapter
 
 
-        if (couponViewModel.coupon.playedGames.size > 0) {
-            maxRate = couponViewModel.coupon.playedGames.map { it.playedBet.odd }
-                .reduce { acc, rate ->
+        if (couponViewModel.coupon?.playedGames?.size!! > 0) {
+            maxRate = couponViewModel.coupon?.playedGames?.map { it.playedBet.odd }
+                ?.reduce { acc, rate ->
                     acc * rate
-                }
+                }!!
         }
 
         updateRateWin()
