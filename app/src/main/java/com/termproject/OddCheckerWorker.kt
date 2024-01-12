@@ -48,10 +48,15 @@ class OddCheckerWorker(val context: Context, workerParams: WorkerParameters) :
                     }
                 }
 
-
+                var isAllWin = false
+                if(playedGames.map { it.playedBet.status == BetStatus.WIN }.size < 1)
+                    isAllWin = false
+                else{
                 val isAllWin =
                     playedGames.map { it.playedBet.status == BetStatus.WIN }
                         .reduce { acc, status -> acc && status }
+            }
+
 
                 if (isAllWin) {
                     coupon.status = CouponStatus.WIN

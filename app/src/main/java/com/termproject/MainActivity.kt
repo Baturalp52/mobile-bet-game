@@ -31,7 +31,7 @@ class MainActivity : FragmentActivity() {
     private lateinit var userViewModel: UserViewModel
     lateinit var couponViewModel: CouponViewModel
     private lateinit var creditDialog: CreditDialog
-    lateinit var existingUser: User
+    var existingUser: User = User(name = "New", surname = "User", city = "",district = "",team = "")
     lateinit var mediaPlayer: MediaPlayer
     lateinit var bulletinFragment: BulletinFragment
     lateinit var couponFragment: CouponFragment
@@ -39,8 +39,8 @@ class MainActivity : FragmentActivity() {
 
     override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
         CoroutineScope(Dispatchers.Main).launch {
+            //userViewModel.deleteUsers()
             val user = userViewModel.getUser()
-
 
             if (user == null) {
                 existingUser = User(
@@ -131,9 +131,9 @@ class MainActivity : FragmentActivity() {
     fun updateBadge() {
 
         val badge = binding.bottomNav.getOrCreateBadge(R.id.coupon)
-        if (couponViewModel.coupon.playedGames.size > 0) {
+        if (couponViewModel.coupon?.playedGames?.size!! > 0) {
             badge.isVisible = true
-            badge.number = couponViewModel.coupon.playedGames.size
+            badge.number = couponViewModel.coupon?.playedGames!!.size
         } else {
             badge.isVisible = false
         }

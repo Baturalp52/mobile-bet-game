@@ -16,7 +16,7 @@ class CreditDialog(context: Context, userViewModel: UserViewModel, creditBtn: Bu
     private var userViewModel: UserViewModel
     private var creditBtn: Button
 
-    private lateinit var existingUser: User
+    private var existingUser: User? = null
 
     init {
         this.userViewModel = userViewModel
@@ -29,7 +29,7 @@ class CreditDialog(context: Context, userViewModel: UserViewModel, creditBtn: Bu
             if (existingUser != null) {
 
                 setMessage(
-                    existingUser.credit.toString()
+                    existingUser!!.credit.toString()
                 )
 
             }
@@ -56,10 +56,10 @@ class CreditDialog(context: Context, userViewModel: UserViewModel, creditBtn: Bu
             "Reset Credits"
         ) { dialog, _ ->
             CoroutineScope(Dispatchers.Main).launch {
-                existingUser.credit = 10000
+                existingUser?.credit  = 10000
                 creditBtn.text = "10000"
 
-                userViewModel.updateUser(existingUser)
+                existingUser?.let { userViewModel.updateUser(it) }
                 Toast.makeText(context, "Your credit is resetted successfully", Toast.LENGTH_SHORT)
                     .show()
                 dialog.dismiss()

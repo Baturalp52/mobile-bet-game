@@ -13,7 +13,8 @@ import java.time.LocalDateTime
 class CouponViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: CouponRepository
 
-    lateinit var coupon: CouponWithPlayedGames
+    var coupon: CouponWithPlayedGames = CouponWithPlayedGames(coupon = Coupon(status = CouponStatus.PENDING),
+        playedGames = ArrayList())
 
     init {
         val couponDAO = CouponRoomDatabase.getDatabase(application).couponDao()
@@ -49,12 +50,12 @@ class CouponViewModel(application: Application) : AndroidViewModel(application) 
     fun playCoupon(amount: Int) {
         // You can now use the database instance to perform database operations
         GlobalScope.launch {
-            coupon.coupon.playedAt = LocalDateTime.now()
-            coupon.coupon.amount = amount
-            var couponId = coupon.coupon.id
-            if (coupon.coupon.id.toInt() == 0)
-                couponId = repository.newCoupon(coupon = coupon.coupon)
-            coupon.playedGames.forEach {
+            coupon?.coupon?.playedAt = LocalDateTime.now()
+            coupon?.coupon?.amount = amount
+            var couponId = coupon?.coupon?.id
+            if (coupon?.coupon?.id?.toInt() == 0)
+                couponId = coupon?.let { repository.newCoupon(coupon = it.coupon) }
+            coupon?.playedGames?.forEach {
                 val playedBetId = repository.newPlayedBet(playedBet = it.playedBet)
 
                 val homeTeam = repository.getTeamByTeamId(it.homeTeam.teamId)
@@ -70,7 +71,9 @@ class CouponViewModel(application: Application) : AndroidViewModel(application) 
                 }
                 it.playedGame.homeTeamId = it.homeTeam.teamId
                 it.playedGame.awayTeamId = it.awayTeam.teamId
-                it.playedGame.couponId = couponId
+                if (couponId != null) {
+                    it.playedGame.couponId = couponId
+                }
                 it.playedGame.playedBetId = playedBetId
                 repository.newPlayedGame(it.playedGame)
 
@@ -98,11 +101,11 @@ class CouponViewModel(application: Application) : AndroidViewModel(application) 
 
 
     fun addGame(game: PlayedGameWithDetails) {
-        coupon.playedGames.add(game)
+        coupon?.playedGames?.add(game)
     }
 
     fun removeLast() {
-        coupon.playedGames.removeLast()
+        coupon?.playedGames?.removeLast()
     }
 
 

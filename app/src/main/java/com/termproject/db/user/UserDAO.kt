@@ -20,4 +20,7 @@ interface UserDAO {
 
     @Query("UPDATE users SET credit = credit - :amount")
     fun reduceCredit(amount: Int)
+
+    @Query("DELETE FROM users")
+    fun deleteUsers()
 }
